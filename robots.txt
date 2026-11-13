@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Allow: /favicon.ico
+Allow: /assets/
+
+Sitemap: https://s2k2.com/sitemap.xml
