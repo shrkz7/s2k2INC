@@ -110,21 +110,27 @@
           })
         });
 
-        if (response.ok) {
+        const data = await response.json().catch(() => ({}));
+
+        if (data.success === 'true' || data.success === true) {
           showToast({
             title: 'Fiber Infrastructure Enquiry Sent',
             subtitle: `Thank you ${name}. Your request has been delivered to selvam@s2k2.com.`
           }, false);
           fiberForm.reset();
+        } else if (data.message && data.message.toLowerCase().includes('activation')) {
+          showToast({
+            title: 'One-Time Activation Required',
+            subtitle: 'Activation email sent to selvam@s2k2.com. Please check inbox/spam to confirm once.'
+          }, false);
         } else {
           showToast({
-            title: 'Notice',
-            subtitle: 'Message recorded. Our dispatch team will follow up promptly.'
+            title: 'Inquiry Recorded',
+            subtitle: 'Thank you. Our dispatch office will follow up promptly.'
           }, false);
           fiberForm.reset();
         }
       } catch (err) {
-        // Fallback grace
         showToast({
           title: 'Enquiry Logged',
           subtitle: `Thank you ${name}. We have noted your request for selvam@s2k2.com.`
@@ -180,16 +186,23 @@
           })
         });
 
-        if (response.ok) {
+        const data = await response.json().catch(() => ({}));
+
+        if (data.success === 'true' || data.success === true) {
           showToast({
             title: 'Web Project Inquiry Sent',
             subtitle: `Thank you ${name}. Your requirements have been submitted to our digital team.`
           }, true);
           webForm.reset();
+        } else if (data.message && data.message.toLowerCase().includes('activation')) {
+          showToast({
+            title: 'One-Time Activation Email Sent',
+            subtitle: 'Check sharukesank01@gmail.com (including Spam folder) & click Activate Form.'
+          }, true);
         } else {
           showToast({
-            title: 'Notice',
-            subtitle: 'Inquiry received. S2K2 Digital team will reply within 24 hours.'
+            title: 'Inquiry Recorded',
+            subtitle: 'Thank you. Our digital team will follow up promptly.'
           }, true);
           webForm.reset();
         }
