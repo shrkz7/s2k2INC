@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>S2K2 Inc. | Optical Fiber Infrastructure & Web Solutions</title>
-  <meta name="description" content="S2K2 Inc. provides enterprise optical fiber infrastructure and high-performance modern web design with built-in business integrations." />
+  <title>S2K2 Inc. | Optical Fiber Infrastructure, Web Systems & Creative Media</title>
+  <meta name="description" content="S2K2 Inc. delivers enterprise optical fiber infrastructure, modern web platforms, and full-spectrum social media and creative brand management across Alberta." />
 
   <!-- Preconnect to Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -15,10 +15,52 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png" />
 
+  <!-- Immediate Theme Initializer & Fail-Safe Global Toggle (Default: Light) -->
+  <script>
+    (function() {
+      try {
+        var saved = localStorage.getItem('s2k2_theme');
+        var theme = (saved === 'dark') ? 'dark' : 'light';
+        if (theme === 'light') {
+          document.documentElement.setAttribute('data-theme', 'light');
+        } else {
+          document.documentElement.removeAttribute('data-theme');
+        }
+      } catch (e) {}
+
+      window.applyTheme = function(theme, save) {
+        if (theme === 'light') {
+          document.documentElement.setAttribute('data-theme', 'light');
+          if (document.body) document.body.setAttribute('data-theme', 'light');
+        } else {
+          document.documentElement.removeAttribute('data-theme');
+          if (document.body) document.body.removeAttribute('data-theme');
+        }
+        if (save !== false) {
+          try { localStorage.setItem('s2k2_theme', theme); } catch (e) {}
+        }
+        document.querySelectorAll('.theme-toggle-label').forEach(function(el) {
+          el.textContent = theme === 'light' ? 'Light' : 'Dark';
+        });
+      };
+
+      var lastToggle = 0;
+      window.toggleTheme = function() {
+        var now = Date.now();
+        if (now - lastToggle < 300) return;
+        lastToggle = now;
+        var isLight = document.documentElement.getAttribute('data-theme') === 'light' ||
+                      (document.body && document.body.getAttribute('data-theme') === 'light');
+        var nextTheme = isLight ? 'dark' : 'light';
+        window.applyTheme(nextTheme, true);
+      };
+    })();
+  </script>
+
   <!-- Core Stylesheet -->
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=1.6" />
 </head>
-<body class="optical-grid-bg">
+<body class="optical-grid-bg" data-theme="light">
 
   <!-- Ambient Background Glows -->
   <div class="ambient-glow-wrapper" aria-hidden="true">
@@ -66,21 +108,36 @@
             </button>
           </li>
           <li>
+            <button class="nav-link-btn creative-btn" data-route="creative-marketing">
+              <span style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #f59e0b;"></span>
+              Creative &amp; Social
+            </button>
+          </li>
+          <li>
             <a href="#company-footer" class="nav-link-btn" style="color: #94a3b8;">Company Info</a>
           </li>
         </ul>
       </nav>
 
-      <!-- Desktop Direct Call Button -->
-      <div style="display: flex; align-items: center; gap: 0.75rem;" class="hidden-mobile">
-        <a href="tel:+15875863606" class="nav-link-btn" style="border: 1px solid rgba(255,255,255,0.12); padding: 0.45rem 1rem; font-family: var(--font-mono); font-size: 0.8rem;">
+      <!-- Desktop Actions (Theme Switcher + Direct Call) -->
+      <div style="display: flex; align-items: center; gap: 0.65rem;" class="hidden-mobile">
+        <button id="themeToggleBtn" class="theme-toggle-btn" aria-label="Toggle Light/Dark Theme" title="Switch Theme (Light / Dark)">
+          <span class="theme-icon-sun">☀️</span>
+          <span class="theme-icon-moon">🌙</span>
+          <span class="theme-toggle-label">Light</span>
+        </button>
+        <a href="tel:+15875863606" class="nav-link-btn" style="border: 1px solid var(--border-light); padding: 0.45rem 1rem; font-family: var(--font-mono); font-size: 0.8rem;">
           <span style="width: 7px; height: 7px; border-radius: 50%; background: #10b981; display: inline-block;"></span>
           Call: +1 (587) 586-3606
         </a>
       </div>
 
-      <!-- Mobile Header Actions (Quick Direct Call + Modern Sleek Trigger) -->
+      <!-- Mobile Header Actions (Theme Toggle + Quick Direct Call + Modern Sleek Trigger) -->
       <div class="mobile-actions-wrapper">
+        <button id="mobileThemeToggle" class="mobile-theme-btn" aria-label="Toggle Light/Dark Theme" title="Switch Theme">
+          <span class="theme-icon-sun">☀️</span>
+          <span class="theme-icon-moon">🌙</span>
+        </button>
         <a href="tel:+15875863606" class="mobile-quick-call-btn" title="Call Field Dispatch" aria-label="Call S2K2 Inc.">
           <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
         </a>
@@ -174,7 +231,23 @@
           <svg width="16" height="16" fill="none" stroke="#d174d2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
         </a>
 
-        <!-- Tile 4: Company Details -->
+        <!-- Tile 4: Social Media & Creative Design -->
+        <a class="mobile-nav-tile tile-creative" data-route="creative-marketing">
+          <div class="tile-left-content">
+            <div class="tile-icon-bubble" style="border-color: rgba(245, 158, 11, 0.35); background: rgba(245, 158, 11, 0.1); color: #f59e0b;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+            </div>
+            <div>
+              <div class="tile-title" style="color: #f59e0b;">Social &amp; Creative Media</div>
+              <div class="tile-subtitle">Social Setup &bull; Posts &bull; Print Flyers &bull; Posters</div>
+            </div>
+          </div>
+          <svg width="16" height="16" fill="none" stroke="#f59e0b" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </a>
+
+        <!-- Tile 5: Company Details -->
         <a href="#company-footer" class="mobile-nav-tile">
           <div class="tile-left-content">
             <div class="tile-icon-bubble">
@@ -192,6 +265,23 @@
           <svg width="16" height="16" fill="none" stroke="#64748b" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
         </a>
 
+      </div>
+
+      <!-- Drawer Theme Switcher -->
+      <div style="padding: 0.75rem 0 0.5rem 0;">
+        <button id="drawerThemeToggle" class="mobile-nav-tile" style="width: 100%; cursor: pointer; text-align: left; border-style: dashed;">
+          <div class="tile-left-content">
+            <div class="tile-icon-bubble">
+              <span class="theme-icon-sun">☀️</span>
+              <span class="theme-icon-moon">🌙</span>
+            </div>
+            <div>
+              <div class="tile-title">Display Theme</div>
+              <div class="tile-subtitle">Switch Light / Dark Mode</div>
+            </div>
+          </div>
+          <span class="theme-toggle-label font-mono-tag" style="font-size: 0.75rem; color: var(--text-muted); padding: 0.2rem 0.6rem; border-radius: 9999px; border: 1px solid var(--border-subtle);">Light</span>
+        </button>
       </div>
     </div>
 
@@ -225,20 +315,20 @@
         
 
         <h1 class="hero-hub-title">
-          Critical Fiber Infrastructure.<br />
-          <span class="gradient-text-dual">Modern Web Systems.</span>
+          Critical Telecom Infrastructure.<br />
+          <span class="gradient-text-tri">Digital Systems &amp; Creative Media.</span>
         </h1>
 
         <p class="hero-hub-subtext">
-          S2K2 Inc. connects physical telecom pathways and digital business tools. 
-          Select a division below to access specialized technical specifications, services, and direct communication channels.
+          S2K2 Inc. connects physical telecom pathways, high-performance web applications, and dynamic brand marketing. 
+          Select a specialized division below to access technical specifications, services, and direct communication channels.
         </p>
 
-        <!-- THE TWO FLOATING BUTTONS / HERO SHOWCASE CARDS -->
+        <!-- THE THREE FLOATING BUTTONS / HERO SHOWCASE CARDS -->
         <div class="floating-cards-grid">
           
           <!-- Floating Card 1: Underground & Aerial Fiber Laying -->
-          <div class="service-float-card fiber-card float-anim-left" data-route="fibre-optic">
+          <div class="service-float-card fiber-card float-anim-1" data-route="fibre-optic">
             <div>
               <div class="card-top-row">
                 <div class="card-icon-bubble bubble-fiber">
@@ -275,7 +365,7 @@
           </div>
 
           <!-- Floating Card 2: Web Designing -->
-          <div class="service-float-card web-card float-anim-right" data-route="web-design">
+          <div class="service-float-card web-card float-anim-2" data-route="web-design">
             <div>
               <div class="card-top-row">
                 <div class="card-icon-bubble bubble-web">
@@ -303,6 +393,40 @@
             <div>
               <button class="floating-action-btn btn-float-violet" data-route="web-design">
                 <span>Explore Web Design Services</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Floating Card 3: Social Media & Creative Design -->
+          <div class="service-float-card creative-card float-anim-3" data-route="creative-marketing">
+            <div>
+              <div class="card-top-row">
+                <div class="card-icon-bubble bubble-creative">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                  </svg>
+                </div>
+                <span class="card-meta-badge badge-creative">Creative Division</span>
+              </div>
+
+              <h2 class="card-service-title">
+                Social Media &amp; Creative Management
+              </h2>
+
+              <p class="card-service-desc">
+                Complete social media account setup, continuous post &amp; story creation, 
+                high-resolution promotional flyers, and on-demand seasonal posters tailored to your marketing calendar.
+              </p>
+            </div>
+
+            <!-- Floating Button 3 -->
+            <div>
+              <button class="floating-action-btn btn-float-amber" data-route="creative-marketing">
+                <span>Explore Creative Services</span>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                   <line x1="5" y1="12" x2="19" y2="12"></line>
                   <polyline points="12 5 19 12 12 19"></polyline>
@@ -825,6 +949,351 @@
   </main>
 
   <!-- ========================================================================
+       VIEW 4: SOCIAL MEDIA MARKETING & CREATIVE POSTER/FLYER DESIGN (/creative-marketing)
+       ======================================================================== -->
+  <main id="view-creative" class="view-section">
+    <div class="container-narrow division-hero">
+      
+      <!-- Back Navigation -->
+      <button class="back-to-hub-link" data-route="home">
+        &larr; Back to S2K2 Hub
+      </button>
+
+      <div class="division-hero-badge badge-creative">
+        S2K2 Inc. &bull; Creative Studio &amp; Social Media Growth
+      </div>
+
+      <h1 class="division-title">
+        Social Media Marketing &amp;<br />
+        <span style="color: #f59e0b;">Creative Poster / Flyer Design</span>
+      </h1>
+
+      <!-- Mandatory Service Paragraph -->
+      <div class="core-statement-box creative-statement">
+        <p>
+          "We empower businesses with turnkey social media setup, consistent multi-platform post creation, high-impact promotional print flyers, and responsive seasonal festival posters as per need. Our designs combine bold visual aesthetics, compelling messaging, and print-ready prepress standards to expand your reach, captivate local audiences, and drive customer action across both digital feeds and physical storefronts."
+        </p>
+      </div>
+
+      <!-- Core Creative Capabilities Section -->
+      <div class="section-heading-wrapper">
+        <span class="section-label" style="color: #f59e0b;">Creative Capabilities &amp; Design Solutions</span>
+        <h2 class="section-title">Complete Digital Presence &amp; Tangible Print Marketing</h2>
+        <p style="color: #94a3b8; font-size: 0.95rem; margin-top: 0.5rem; max-width: 680px;">
+          From initializing your social media channels from scratch to producing on-demand festival posters and direct-mail flyers, we provide full creative execution for your brand.
+        </p>
+      </div>
+
+      <div class="features-grid-2">
+        
+        <!-- Feature 1: Social Media Setup -->
+        <div class="feature-item-card">
+          <div class="feature-icon-box bubble-creative">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+              <line x1="12" y1="18" x2="12.01" y2="18"></line>
+            </svg>
+          </div>
+          <h3 class="feature-title">Social Media Channel Setup &amp; Profile Architecture</h3>
+          <p class="feature-desc">
+            Launch your brand across major social platforms with fully branded, optimized profiles designed to build immediate credibility and customer trust.
+          </p>
+          <ul class="feature-check-list">
+            <li><span class="check-bullet-creative">&bull;</span> Multi-platform setup across Instagram, Facebook Business Suite, LinkedIn, TikTok &amp; Google Business</li>
+            <li><span class="check-bullet-creative">&bull;</span> High-resolution branded profile avatars, responsive cover banners &amp; cohesive highlight icon suites</li>
+            <li><span class="check-bullet-creative">&bull;</span> Custom link-in-bio hub directing followers directly to phone dispatch, booking links &amp; web pages</li>
+            <li><span class="check-bullet-creative">&bull;</span> Comprehensive brand asset kit: hex color standards, typography rules &amp; watermark overlays</li>
+          </ul>
+        </div>
+
+        <!-- Feature 2: Post Creation -->
+        <div class="feature-item-card">
+          <div class="feature-icon-box bubble-creative">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="3" y1="9" x2="21" y2="9"></line>
+              <line x1="9" y1="21" x2="9" y2="9"></line>
+            </svg>
+          </div>
+          <h3 class="feature-title">Engaging Social Media Posts &amp; Content Creation</h3>
+          <p class="feature-desc">
+            Stop the scroll with tailored visual graphics engineered for high engagement, audience interaction, and continuous brand visibility.
+          </p>
+          <ul class="feature-check-list">
+            <li><span class="check-bullet-creative">&bull;</span> Custom graphics for feed posts, multi-slide educational carousels, stories &amp; reel cover designs</li>
+            <li><span class="check-bullet-creative">&bull;</span> Perfect platform calibrations: 1:1 Feed square, 4:5 portrait &amp; 9:16 vertical story formats</li>
+            <li><span class="check-bullet-creative">&bull;</span> Product launches, promotional discounts, customer reviews &amp; operational announcement posts</li>
+            <li><span class="check-bullet-creative">&bull;</span> Ready-to-schedule image bundles delivered with engaging caption copy &amp; targeted hashtags</li>
+          </ul>
+        </div>
+
+        <!-- Feature 3: Print Flyers -->
+        <div class="feature-item-card">
+          <div class="feature-icon-box bubble-creative">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+              <polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
+          </div>
+          <h3 class="feature-title">Print-Ready Promotional Flyers &amp; Mailers</h3>
+          <p class="feature-desc">
+            Tangible print marketing that commands attention in local mailboxes, on store counters, and at community networking events.
+          </p>
+          <ul class="feature-check-list">
+            <li><span class="check-bullet-creative">&bull;</span> Single-sided, double-sided, and tri-fold promotional flyer designs</li>
+            <li><span class="check-bullet-creative">&bull;</span> Prepress CMYK 300 DPI exports with standard bleed margins and safe crop zones</li>
+            <li><span class="check-bullet-creative">&bull;</span> Direct-mail flyers, door-hangers, grand opening handouts &amp; promotional discount coupons</li>
+            <li><span class="check-bullet-creative">&bull;</span> Supplied in print-ready PDF/X files for commercial printers plus web-ready digital formats</li>
+          </ul>
+        </div>
+
+        <!-- Feature 4: Seasonal Posters -->
+        <div class="feature-item-card">
+          <div class="feature-icon-box bubble-creative">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+          </div>
+          <h3 class="feature-title">Seasonal &amp; Festive Posters on Demand (As Per Need)</h3>
+          <p class="feature-desc">
+            Dynamic, timely campaign posters crafted around your business calendar and upcoming holidays whenever you need them.
+          </p>
+          <ul class="feature-check-list">
+            <li><span class="check-bullet-creative">&bull;</span> Tailored seasonal themes: Christmas, New Year, Black Friday, Diwali, Canada Day, Halloween &amp; Summer</li>
+            <li><span class="check-bullet-creative">&bull;</span> Storefront window posters, indoor display boards, tabletop easels &amp; A-frame sidewalk signage</li>
+            <li><span class="check-bullet-creative">&bull;</span> Fast on-demand turnaround for flash sales, holiday operating hours &amp; limited-time events</li>
+            <li><span class="check-bullet-creative">&bull;</span> Scalable high-vector typography ensuring razor-sharp clarity from mini-posters to large banners</li>
+          </ul>
+        </div>
+
+        <!-- Feature 5: Restaurant & Retail Collateral -->
+        <div class="feature-item-card">
+          <div class="feature-icon-box bubble-creative">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+          </div>
+          <h3 class="feature-title">Restaurant &amp; Retail Collateral (Print + Digital)</h3>
+          <p class="feature-desc">
+            Physical branding elements that enhance your in-store customer journey, streamline orders, and encourage higher ticket sizes.
+          </p>
+          <ul class="feature-check-list">
+            <li><span class="check-bullet-creative">&bull;</span> Modern dine-in menus, takeout menus, laminated counter display boards &amp; table tents</li>
+            <li><span class="check-bullet-creative">&bull;</span> Scannable QR code table stands linking directly to digital menus, Google reviews &amp; Wi-Fi login</li>
+            <li><span class="check-bullet-creative">&bull;</span> Branded customer loyalty punch cards, gift vouchers, product stickers &amp; packaging labels</li>
+            <li><span class="check-bullet-creative">&bull;</span> Seamless visual harmony between your in-store printed collateral and online website</li>
+          </ul>
+        </div>
+
+        <!-- Feature 6: Digital Ads & Banners -->
+        <div class="feature-item-card">
+          <div class="feature-icon-box bubble-creative">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <circle cx="12" cy="12" r="6"></circle>
+              <circle cx="12" cy="12" r="2"></circle>
+            </svg>
+          </div>
+          <h3 class="feature-title">Targeted Digital Ad Creatives &amp; Display Banners</h3>
+          <p class="feature-desc">
+            High-conversion advertising visuals designed for Meta sponsored ads (Facebook &amp; Instagram) and Google Display networks.
+          </p>
+          <ul class="feature-check-list">
+            <li><span class="check-bullet-creative">&bull;</span> Industry-standard display dimensions (300x250, 728x90, 1080x1080, 1080x1920)</li>
+            <li><span class="check-bullet-creative">&bull;</span> High-contrast visual hierarchy engineered to lower cost-per-click and drive conversions</li>
+            <li><span class="check-bullet-creative">&bull;</span> Seasonal promotion banners, lead magnet visuals &amp; discount event graphics</li>
+            <li><span class="check-bullet-creative">&bull;</span> Multiple A/B creative variations with alternative headline hooks and color schemes</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- 4-Step Creative Workflow -->
+      <div style="margin-top: 4.5rem; margin-bottom: 4rem;">
+        <div class="section-heading-wrapper">
+          <span class="section-label" style="color: #f59e0b;">Production Lifecycle</span>
+          <h2 class="section-title">Our Collaborative 4-Step Creative Workflow</h2>
+        </div>
+
+        <div class="process-steps-grid">
+          <div class="process-card">
+            <div class="process-step-num" style="color: #f59e0b;">01</div>
+            <h4 class="process-step-title">Brief &amp; Brand Discovery</h4>
+            <p class="process-step-desc">
+              We define your target audience, aesthetic preferences, brand tone, and upcoming marketing campaign milestones.
+            </p>
+          </div>
+
+          <div class="process-card">
+            <div class="process-step-num" style="color: #f59e0b;">02</div>
+            <h4 class="process-step-title">Concept &amp; Rapid Mockups</h4>
+            <p class="process-step-desc">
+              We create high-fidelity design drafts, composition layouts, and color-balanced options for your review.
+            </p>
+          </div>
+
+          <div class="process-card">
+            <div class="process-step-num" style="color: #f59e0b;">03</div>
+            <h4 class="process-step-title">Collaborative Refinement</h4>
+            <p class="process-step-desc">
+              Fine-tuning typography, image contrast, and copy formatting based on your feedback until the creative is perfected.
+            </p>
+          </div>
+
+          <div class="process-card">
+            <div class="process-step-num" style="color: #f59e0b;">04</div>
+            <h4 class="process-step-title">Delivery &amp; Prepress Files</h4>
+            <p class="process-step-desc">
+              Full asset handover: 300 DPI CMYK PDFs for local print shops, plus optimized PNG/WebP files ready for digital feeds.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact & Consultation Form (Split Section) -->
+      <div class="section-heading-wrapper" style="margin-top: 4.5rem;">
+        <span class="section-label" style="color: #f59e0b;">Start A Creative Project</span>
+        <h2 class="section-title">Request Social Media Setup, Post Design or Print Collateral</h2>
+        <p style="color: #94a3b8; font-size: 0.95rem; margin-top: 0.5rem; max-width: 650px;">
+          Tell us about your brand goals, upcoming seasonal events, or required print collateral. Our creative team will review your brief and follow up promptly.
+        </p>
+      </div>
+
+      <div class="contact-layout-split">
+        
+        <!-- Contact Information Panel -->
+        <div class="contact-info-panel">
+          <h3 style="font-size: 1.35rem; margin-bottom: 0.5rem; color: #ffffff;">S2K2 Creative Studio</h3>
+          <p style="color: #94a3b8; font-size: 0.88rem; margin-bottom: 1.75rem;">
+            Social Media Growth &bull; Promotional Flyers &bull; Seasonal Festive Posters
+          </p>
+
+          <div class="contact-meta-item">
+            <div class="contact-icon-bubble">
+              <svg width="20" height="20" fill="none" stroke="#f59e0b" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+            </div>
+            <div>
+              <div class="contact-meta-label">Creative Desk Direct Email</div>
+              <a href="mailto:selvam@s2k2.com" class="contact-meta-val" style="color: #cbd5e1; text-decoration: none;">selvam@s2k2.com</a>
+              <div style="font-size: 0.8rem; color: #64748b; margin-top: 0.2rem;">Official correspondence &amp; design brief intake</div>
+            </div>
+          </div>
+
+          <div class="contact-meta-item">
+            <div class="contact-icon-bubble">
+              <svg width="20" height="20" fill="none" stroke="#f59e0b" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+            </div>
+            <div>
+              <div class="contact-meta-label">Telephone Consultation</div>
+              <div class="contact-meta-val" style="color: #cbd5e1;">Available via Scheduling / Call</div>
+              <div style="font-size: 0.8rem; color: #64748b; margin-top: 0.2rem;">Central office dispatch: +1 (587) 586-3606</div>
+            </div>
+          </div>
+
+          <div class="contact-meta-item">
+            <div class="contact-icon-bubble">
+              <svg width="20" height="20" fill="none" stroke="#f59e0b" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            </div>
+            <div>
+              <div class="contact-meta-label">Seasonal On-Demand Response</div>
+              <div class="contact-meta-val" style="font-size: 0.95rem;">Rapid Event Turnaround</div>
+              <div style="font-size: 0.8rem; color: #64748b; margin-top: 0.2rem;">Initial design drafts and seasonal concepts within 24-48 hours</div>
+            </div>
+          </div>
+
+          <div style="margin-top: 2rem; padding: 1.25rem; background: rgba(245, 158, 11, 0.05); border: 1px dashed rgba(245, 158, 11, 0.3); border-radius: var(--radius-md);">
+            <div style="font-size: 0.85rem; font-weight: 600; color: #fbbf24; margin-bottom: 0.35rem;">
+              🎨 Flexible Project &amp; Seasonal Packaging
+            </div>
+            <p style="font-size: 0.82rem; color: #94a3b8; line-height: 1.55; margin: 0;">
+              Available as on-demand single project requests (e.g., a one-time grand opening flyer or Christmas poster) or ongoing monthly social media design bundles.
+            </p>
+          </div>
+        </div>
+
+        <!-- Consultation Form -->
+        <div class="form-card">
+          <h3 style="font-size: 1.35rem; margin-bottom: 0.35rem; color: #ffffff;">Start a Creative Consultation</h3>
+          <p style="color: #94a3b8; font-size: 0.88rem; margin-bottom: 1.75rem;">
+            Provide your campaign goals and design requirements below.
+          </p>
+
+          <form id="creativeConsultationForm">
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label class="form-label" for="creativeName">Your Full Name *</label>
+                <input type="text" class="form-input creative-focus" id="creativeName" placeholder="e.g. Sarah Jenkins" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="creativeEmail">Email Address *</label>
+                <input type="email" class="form-input creative-focus" id="creativeEmail" placeholder="e.g. sarah@business.com" required />
+              </div>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label class="form-label" for="creativeBusiness">Business / Brand Name</label>
+                <input type="text" class="form-input creative-focus" id="creativeBusiness" placeholder="e.g. Peak Bistro &amp; Lounge" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="creativePhone">Phone Number</label>
+                <input type="tel" class="form-input creative-focus" id="creativePhone" placeholder="e.g. +1 (403) 555-0199" />
+              </div>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label class="form-label" for="creativeService">Primary Creative Need *</label>
+                <select class="form-select creative-focus" id="creativeService">
+                  <option value="Social Media Setup & Profile Architecture">Social Media Setup &amp; Profile Architecture</option>
+                  <option value="Ongoing Social Media Posts & Stories">Ongoing Social Media Posts &amp; Stories</option>
+                  <option value="Print-Ready Promotional Flyers & Mailers">Print-Ready Promotional Flyers &amp; Mailers</option>
+                  <option value="Seasonal & Festive Holiday Posters">Seasonal &amp; Festive Holiday Posters</option>
+                  <option value="Restaurant & Retail Menus / Table Tents">Restaurant &amp; Retail Menus / Table Tents</option>
+                  <option value="Targeted Digital Ad Creatives & Banners">Targeted Digital Ad Creatives &amp; Banners</option>
+                  <option value="Complete Brand Launch Suite (Social + Print + Posters)">Complete Brand Launch Suite (Social + Print + Posters)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="creativeTiming">Target Timing / Seasonality</label>
+                <select class="form-select creative-focus" id="creativeTiming">
+                  <option value="Immediate (Next 48-72 hours)">Immediate (Next 48-72 hours)</option>
+                  <option value="Upcoming Holiday / Festival Season">Upcoming Holiday / Festival Season</option>
+                  <option value="Next 2-4 Weeks (Planned Launch)">Next 2-4 Weeks (Planned Launch)</option>
+                  <option value="Ongoing Monthly Design Retainer">Ongoing Monthly Design Retainer</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="creativeMessage">Project Details, Seasonal Focus &amp; Requirements *</label>
+              <textarea class="form-textarea creative-focus" id="creativeMessage" placeholder="Describe your brand aesthetic, target audience, upcoming event date, or any specific flyer/poster requirements..." required></textarea>
+            </div>
+
+            <button type="submit" class="form-submit-btn btn-float-amber">
+              <span>Send Creative Request</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+            </button>
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ========================================================================
        PERSISTENT FLOATING QUICK DOCK (SWITCHER PILL BAR)
        ======================================================================== -->
   <aside class="floating-dock-bar" aria-label="Quick Service Navigator">
@@ -832,10 +1301,18 @@
       <span>🌐 Hub</span>
     </button>
     <button class="dock-item-btn dock-fiber" data-route="fibre-optic" title="Go to Fiber Laying">
-      <span>⚡ Fiber Optic</span>
+      <span>⚡ Fiber</span>
     </button>
     <button class="dock-item-btn dock-web" data-route="web-design" title="Go to Web Design">
-      <span>💻 Web Design</span>
+      <span>💻 Web</span>
+    </button>
+    <button class="dock-item-btn dock-creative" data-route="creative-marketing" title="Go to Social & Creative Media">
+      <span>🎨 Creative</span>
+    </button>
+    <div class="dock-sep" style="width: 1px; height: 18px; background: rgba(255, 255, 255, 0.15); margin: 0 0.15rem;"></div>
+    <button id="dockThemeToggle" class="dock-item-btn dock-theme-btn" aria-label="Toggle Light/Dark Theme" title="Switch Theme (Light / Dark)">
+      <span class="theme-icon-sun">☀️ <span class="theme-toggle-label">Light</span></span>
+      <span class="theme-icon-moon">🌙 <span class="theme-toggle-label">Dark</span></span>
     </button>
   </aside>
 
@@ -854,8 +1331,8 @@
         <div>
           <div class="footer-brand-name">S2K2 Inc.</div>
           <p class="footer-brand-desc">
-            Dual-capability infrastructure enterprise delivering critical optical fiber outside plant installations 
-            and modern high-performance web applications with business platform integrations.
+            Tri-capability enterprise delivering critical optical fiber outside plant installations, 
+            modern high-performance web systems, and high-impact social media &amp; print marketing.
           </p>
           <div style="margin-top: 1.25rem; display: flex; align-items: center; gap: 0.5rem;">
             <span class="font-mono-tag" style="font-size: 0.75rem; color: #10b981; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: 0.25rem 0.65rem; border-radius: 9999px;">
@@ -885,6 +1362,18 @@
             <li class="footer-link-item"><a data-route="web-design">POS &amp; Online Payment Systems</a></li>
             <li class="footer-link-item"><a data-route="web-design">Table Reservations &amp; Dining</a></li>
             <li class="footer-link-item"><a data-route="web-design">Project Consultation Form</a></li>
+          </ul>
+        </div>
+
+        <!-- Division 3 Links -->
+        <div>
+          <h4 class="footer-col-title" style="color: #f59e0b;">Creative &amp; Social</h4>
+          <ul class="footer-links-list">
+            <li class="footer-link-item"><a data-route="creative-marketing">Social Media Setup &amp; Profiles</a></li>
+            <li class="footer-link-item"><a data-route="creative-marketing">Post &amp; Story Content Creation</a></li>
+            <li class="footer-link-item"><a data-route="creative-marketing">Print Flyers &amp; Mailers (300 DPI)</a></li>
+            <li class="footer-link-item"><a data-route="creative-marketing">Seasonal &amp; Festive Posters</a></li>
+            <li class="footer-link-item"><a data-route="creative-marketing">Creative Consultation Form</a></li>
           </ul>
         </div>
 
@@ -920,6 +1409,7 @@
         <div style="display: flex; gap: 1.5rem;">
           <a data-route="fibre-optic" style="color: #94a3b8; text-decoration: none; font-size: 0.8rem;">Fiber Optic</a>
           <a data-route="web-design" style="color: #94a3b8; text-decoration: none; font-size: 0.8rem;">Web Designing</a>
+          <a data-route="creative-marketing" style="color: #94a3b8; text-decoration: none; font-size: 0.8rem;">Creative Media</a>
           <a href="#company-footer" style="color: #94a3b8; text-decoration: none; font-size: 0.8rem;">Privacy &amp; Terms</a>
         </div>
       </div>
@@ -927,9 +1417,9 @@
     </div>
   </footer>
 
-  <!-- Scripts -->
-  <script src="router.js"></script>
-  <script src="app.js"></script>
-  <script src="grid-wave.js"></script>
+  <!-- Scripts (Versioned cache-busters ensure immediate hot-reload) -->
+  <script src="router.js?v=1.6"></script>
+  <script src="app.js?v=1.6"></script>
+  <script src="grid-wave.js?v=1.6"></script>
 </body>
 </html>

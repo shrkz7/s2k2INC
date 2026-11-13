@@ -3,6 +3,7 @@
     { "source": "/fibre-optic", "destination": "/index.html" },
     { "source": "/fiber-optic", "destination": "/index.html" },
     { "source": "/web-design", "destination": "/index.html" },
+    { "source": "/creative-marketing", "destination": "/index.html" },
     { "source": "/home/:match*", "destination": "/index.html" }
   ]
 }

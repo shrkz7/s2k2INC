@@ -9,13 +9,15 @@
   const ROUTES = {
     HOME: 'home',
     FIBER: 'fibre-optic',
-    WEB: 'web-design'
+    WEB: 'web-design',
+    CREATIVE: 'creative-marketing'
   };
 
   const TITLES = {
-    [ROUTES.HOME]: 'S2K2 Inc. | Optical Fiber Infrastructure & Modern Web Solutions',
+    [ROUTES.HOME]: 'S2K2 Inc. | Optical Fiber Infrastructure, Web Systems & Creative Media',
     [ROUTES.FIBER]: 'Underground & Aerial Fiber Laying | S2K2 Inc.',
-    [ROUTES.WEB]: 'Web Designing & Business Integrations | S2K2 Inc.'
+    [ROUTES.WEB]: 'Web Designing & Business Integrations | S2K2 Inc.',
+    [ROUTES.CREATIVE]: 'Social Media & Creative Management | S2K2 Inc.'
   };
 
   const isFileProtocol = window.location.protocol === 'file:';
@@ -24,7 +26,7 @@
   const APP_ROOT = (function () {
     let path = window.location.pathname;
     // Strip trailing file names or known route slugs if user landed directly on one
-    path = path.replace(/(index\.html?|fibre-optic|fiber-optic|web-design|web-designing|\/)+$/i, '');
+    path = path.replace(/(index\.html?|fibre-optic|fiber-optic|web-design|web-designing|creative-marketing|marketing|\/)+$/i, '');
     return path ? (path + '/') : '/';
   })();
 
@@ -40,6 +42,9 @@
     if (hash.includes('web-design') || hash.includes('web-designing') || hash === 'web') {
       return ROUTES.WEB;
     }
+    if (hash.includes('creative') || hash.includes('marketing') || hash.includes('social') || hash.includes('poster')) {
+      return ROUTES.CREATIVE;
+    }
     if (hash === 'home' || hash === 'hub') {
       return ROUTES.HOME;
     }
@@ -52,6 +57,9 @@
     if (pathname.includes('web-design') || pathname.includes('web-designing')) {
       return ROUTES.WEB;
     }
+    if (pathname.includes('creative-marketing') || pathname.includes('marketing') || pathname.includes('social-media')) {
+      return ROUTES.CREATIVE;
+    }
 
     return ROUTES.HOME;
   }
@@ -63,7 +71,8 @@
     const views = {
       [ROUTES.HOME]: document.getElementById('view-home'),
       [ROUTES.FIBER]: document.getElementById('view-fiber'),
-      [ROUTES.WEB]: document.getElementById('view-web')
+      [ROUTES.WEB]: document.getElementById('view-web'),
+      [ROUTES.CREATIVE]: document.getElementById('view-creative')
     };
 
     // Hide all views
@@ -131,6 +140,9 @@
     } else if (routeKey === 'web-design' || routeKey === 'web-designing' || routeKey === ROUTES.WEB) {
       cleanRoute = ROUTES.WEB;
       urlSlug = 'web-design';
+    } else if (routeKey === 'creative-marketing' || routeKey === 'marketing' || routeKey === 'creative' || routeKey === ROUTES.CREATIVE) {
+      cleanRoute = ROUTES.CREATIVE;
+      urlSlug = 'creative-marketing';
     } else {
       cleanRoute = ROUTES.HOME;
       urlSlug = '';
