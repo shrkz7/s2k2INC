@@ -139,7 +139,7 @@
     });
   }
 
-  // --- Form 2: Web Designing Project Consultation Form (Dispatches to GoDaddy selvam@s2k2.com) ---
+  // --- Form 2: Web Designing Project Consultation Form (Dispatches to Gmail sharukesank01@gmail.com) ---
   const webForm = document.getElementById('webConsultationForm');
   if (webForm) {
     webForm.addEventListener('submit', async function (e) {
@@ -164,7 +164,7 @@
       }
 
       try {
-        const response = await fetch('https://formsubmit.co/ajax/selvam@s2k2.com', {
+        const response = await fetch('https://formsubmit.co/ajax/sharukesank01@gmail.com', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -183,7 +183,7 @@
         if (response.ok) {
           showToast({
             title: 'Web Project Inquiry Sent',
-            subtitle: `Thank you ${name}. Your requirements were delivered to selvam@s2k2.com.`
+            subtitle: `Thank you ${name}. Your requirements have been submitted to our digital team.`
           }, true);
           webForm.reset();
         } else {
