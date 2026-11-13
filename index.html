@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>S2K2 Inc. | Optical Fiber Infrastructure & Web Solutions</title>
+  <meta name="description" content="S2K2 Inc. provides enterprise optical fiber infrastructure and high-performance modern web design with built-in business integrations." />
+
+  <!-- Preconnect to Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png" />
+
+  <!-- Core Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="optical-grid-bg">
+
+  <!-- Ambient Background Glows -->
+  <div class="ambient-glow-wrapper" aria-hidden="true">
+    <div class="glow-orb glow-orb-fiber"></div>
+    <div class="glow-orb glow-orb-web"></div>
+    <div class="glow-orb glow-orb-bottom"></div>
+  </div>
+
+  <!-- Single Unified Glowing Grid Canvas (Zero Overlap) -->
+  <canvas id="singleGlowingGridCanvas" style="position: fixed; inset: 0; pointer-events: none; z-index: 0;"></canvas>
+
+  <!-- Main Navigation Header -->
+  <header class="main-header">
+    <div class="container-wide" style="width: 100%; display: flex; align-items: center; justify-content: space-between;">
+      
+      <!-- Brand Logo -->
+      <a class="nav-brand-logo" data-route="home">
+        <div class="brand-badge-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00f0ff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+        </div>
+        <div>
+          <div class="brand-text-title">
+            S2K2 <span style="font-size: 0.85rem; font-weight: 600; color: #94a3b8;">INC.</span>
+          </div>
+          <div class="brand-text-subtitle">Infrastructure &bull; Digital Systems</div>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Pills -->
+      <nav style="display: flex; align-items: center; gap: 0.5rem;" class="hidden-mobile">
+        <ul class="nav-pills-list">
+          <li><button class="nav-link-btn" data-route="home">Home Hub</button></li>
+          <li>
+            <button class="nav-link-btn fiber-btn" data-route="fibre-optic">
+              <span style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #00f0ff;"></span>
+              Fiber Optic
+            </button>
+          </li>
+          <li>
+            <button class="nav-link-btn web-btn" data-route="web-design">
+              <span style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #d174d2;"></span>
+              Web Design
+            </button>
+          </li>
+          <li>
+            <a href="#company-footer" class="nav-link-btn" style="color: #94a3b8;">Company Info</a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Desktop Direct Call Button -->
+      <div style="display: flex; align-items: center; gap: 0.75rem;" class="hidden-mobile">
+        <a href="tel:+15875863606" class="nav-link-btn" style="border: 1px solid rgba(255,255,255,0.12); padding: 0.45rem 1rem; font-family: var(--font-mono); font-size: 0.8rem;">
+          <span style="width: 7px; height: 7px; border-radius: 50%; background: #10b981; display: inline-block;"></span>
+          Call: +1 (587) 586-3606
+        </a>
+      </div>
+
+      <!-- Mobile Header Actions (Quick Direct Call + Modern Sleek Trigger) -->
+      <div class="mobile-actions-wrapper">
+        <a href="tel:+15875863606" class="mobile-quick-call-btn" title="Call Field Dispatch" aria-label="Call S2K2 Inc.">
+          <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+        </a>
+        <button id="mobileMenuToggle" class="mobile-menu-trigger" aria-label="Open Navigation">
+          <span class="menu-bar-line line-1"></span>
+          <span class="menu-bar-line line-2"></span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Modern Sleek Mobile Navigation Drawer Sheet -->
+  <div id="mobileDrawer" class="hidden">
+    <div>
+      <!-- Drawer Top Bar -->
+      <div class="mobile-drawer-header">
+        <div style="display: flex; align-items: center; gap: 0.65rem;">
+          <div class="brand-badge-icon" style="width: 36px; height: 36px; border-radius: 10px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00f0ff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+          </div>
+          <div>
+            <div style="font-weight: 800; font-size: 1.05rem; color: #ffffff; letter-spacing: -0.02em;">S2K2 <span style="font-size: 0.75rem; color: #94a3b8; font-weight: 600;">INC.</span></div>
+            <div style="font-size: 0.65rem; color: #64748b; font-family: var(--font-mono); text-transform: uppercase;">Infrastructure &bull; Digital Systems</div>
+          </div>
+        </div>
+        <button id="mobileMenuClose" class="mobile-close-btn" aria-label="Close Navigation">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Navigation Card Tiles -->
+      <div class="mobile-nav-tiles-grid">
+        
+        <!-- Tile 1: Home Hub -->
+        <a class="mobile-nav-tile" data-route="home">
+          <div class="tile-left-content">
+            <div class="tile-icon-bubble">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+              </svg>
+            </div>
+            <div>
+              <div class="tile-title">Home Gateway</div>
+              <div class="tile-subtitle">Overview &bull; Dual Division Hub</div>
+            </div>
+          </div>
+          <svg width="16" height="16" fill="none" stroke="#64748b" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </a>
+
+        <!-- Tile 2: Fiber Laying -->
+        <a class="mobile-nav-tile tile-fiber" data-route="fibre-optic">
+          <div class="tile-left-content">
+            <div class="tile-icon-bubble" style="border-color: rgba(0, 240, 255, 0.3); background: rgba(0, 240, 255, 0.08); color: #00f0ff;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="6" y1="3" x2="6" y2="15"></line>
+                <circle cx="18" cy="6" r="3"></circle>
+                <circle cx="6" cy="18" r="3"></circle>
+                <path d="M18 9a9 9 0 0 1-9 9"></path>
+              </svg>
+            </div>
+            <div>
+              <div class="tile-title" style="color: #00f0ff;">Fiber Laying</div>
+              <div class="tile-subtitle">Underground Trenching &bull; Aerial Pole Plant</div>
+            </div>
+          </div>
+          <svg width="16" height="16" fill="none" stroke="#00f0ff" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </a>
+
+        <!-- Tile 3: Web Designing -->
+        <a class="mobile-nav-tile tile-web" data-route="web-design">
+          <div class="tile-left-content">
+            <div class="tile-icon-bubble" style="border-color: rgba(209, 116, 210, 0.3); background: rgba(209, 116, 210, 0.08); color: #d174d2;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                <line x1="8" y1="21" x2="16" y2="21"></line>
+                <line x1="12" y1="17" x2="12" y2="21"></line>
+              </svg>
+            </div>
+            <div>
+              <div class="tile-title" style="color: #d174d2;">Web Designing</div>
+              <div class="tile-subtitle">Modern Responsive &bull; Business Integrations</div>
+            </div>
+          </div>
+          <svg width="16" height="16" fill="none" stroke="#d174d2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </a>
+
+        <!-- Tile 4: Company Details -->
+        <a href="#company-footer" class="mobile-nav-tile">
+          <div class="tile-left-content">
+            <div class="tile-icon-bubble">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="16" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+              </svg>
+            </div>
+            <div>
+              <div class="tile-title">Corporate Info</div>
+              <div class="tile-subtitle">Calgary Base &bull; Contact Details</div>
+            </div>
+          </div>
+          <svg width="16" height="16" fill="none" stroke="#64748b" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- Drawer Bottom Contact Deck -->
+    <div class="mobile-drawer-footer">
+      <div class="mobile-quick-actions-grid">
+        <a href="tel:+15875863606" class="mobile-action-pill call-pill">
+          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+          Call Office
+        </a>
+        <a href="mailto:selvam@s2k2.com" class="mobile-action-pill email-pill">
+          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+          Email Us
+        </a>
+      </div>
+      <div style="font-size: 0.72rem; color: #64748b; text-align: center; font-family: var(--font-mono);">
+        S2K2 Inc. &bull; Calgary, Alberta, Canada
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       VIEW 1: HOME GATEWAY & DUAL FLOATING HUB (default /)
+       ======================================================================== -->
+  <main id="view-home" class="view-section active">
+    
+    <!-- Hero Hub Section -->
+    <section class="hero-hub-section">
+      <div class="container-narrow">
+        
+        <div class="hero-eyebrow-pill">
+          <span style="width: 7px; height: 7px; border-radius: 50%; background: #00f0ff; display: inline-block;"></span>
+          S2K2.COM &bull; DUAL ENTERPRISE CAPABILITIES
+        </div>
+
+        <h1 class="hero-hub-title">
+          Critical Fiber Infrastructure.<br />
+          <span class="gradient-text-dual">Modern Web Systems.</span>
+        </h1>
+
+        <p class="hero-hub-subtext">
+          S2K2 Inc. connects physical telecom pathways and digital business tools. 
+          Select a division below to access specialized technical specifications, services, and direct communication channels.
+        </p>
+
+        <!-- THE TWO FLOATING BUTTONS / HERO SHOWCASE CARDS -->
+        <div class="floating-cards-grid">
+          
+          <!-- Floating Card 1: Underground & Aerial Fiber Laying -->
+          <div class="service-float-card fiber-card float-anim-left" data-route="fibre-optic">
+            <div>
+              <div class="card-top-row">
+                <div class="card-icon-bubble bubble-fiber">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="6" y1="3" x2="6" y2="15"></line>
+                    <circle cx="18" cy="6" r="3"></circle>
+                    <circle cx="6" cy="18" r="3"></circle>
+                    <path d="M18 9a9 9 0 0 1-9 9"></path>
+                  </svg>
+                </div>
+                <span class="card-meta-badge badge-fiber">Infrastructure Division</span>
+              </div>
+
+              <h2 class="card-service-title">
+                Underground &amp; Aerial Fiber Laying
+              </h2>
+
+              <p class="card-service-desc">
+                High-precision directional drilling, civil duct trenching, utility pole mounting, 
+                core-alignment fusion splicing, and certified bi-directional OTDR testing engineered for long-term resilience.
+              </p>
+            </div>
+
+            <!-- Floating Button 1 -->
+            <div>
+              <button class="floating-action-btn btn-float-cyan" data-route="fibre-optic">
+                <span>Explore Fiber Optic Services</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Floating Card 2: Web Designing -->
+          <div class="service-float-card web-card float-anim-right" data-route="web-design">
+            <div>
+              <div class="card-top-row">
+                <div class="card-icon-bubble bubble-web">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                  </svg>
+                </div>
+                <span class="card-meta-badge badge-web">Digital Division</span>
+              </div>
+
+              <h2 class="card-service-title">
+                Web Designing &amp; Integrations
+              </h2>
+
+              <p class="card-service-desc">
+                Modern, responsive websites integrated with industry-trusted platforms: 
+                custom booking schedules, online table reservations, 
+                and seamless POS billing systems tailored to your business operations.
+              </p>
+            </div>
+
+            <!-- Floating Button 2 -->
+            <div>
+              <button class="floating-action-btn btn-float-violet" data-route="web-design">
+                <span>Explore Web Design Services</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================================
+       VIEW 2: UNDERGROUND & AERIAL FIBER LAYING (/fibre-optic)
+       ======================================================================== -->
+  <main id="view-fiber" class="view-section">
+    <div class="container-narrow division-hero">
+      
+      <!-- Back Navigation -->
+      <button class="back-to-hub-link" data-route="home">
+        &larr; Back to S2K2 Hub
+      </button>
+
+      <div class="division-hero-badge badge-fiber">
+        S2K2 Inc. &bull; Physical Outside Plant (OSP)
+      </div>
+
+      <h1 class="division-title">
+        Underground &amp; Aerial<br />
+        <span style="color: #00f0ff;">Fiber Laying Services</span>
+      </h1>
+
+      <!-- Mandatory Service Paragraph -->
+      <div class="core-statement-box fiber-statement">
+        <p>
+          "We provide reliable underground and aerial fiber optic cabling services, ensuring high-speed and secure connectivity. Whether through precise trenching and duct installation or high-tension pole mounting, our solutions protect your infrastructure from environmental damage while maintaining long-term performance and minimal disruption to the surrounding area."
+        </p>
+      </div>
+
+      <!-- Engineering Capabilities Grid -->
+      <div class="section-heading-wrapper">
+        <span class="section-label" style="color: #00f0ff;">Specialized Technical Capabilities</span>
+        <h2 class="section-title">Civil Engineering &amp; High-Tension Aerial Infrastructure</h2>
+      </div>
+
+      <div class="features-grid-2">
+        
+        <!-- Feature 1 -->
+        <div class="feature-item-card">
+          <div class="feature-icon-box bubble-fiber">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 12h20"></path>
+              <path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6"></path>
+              <path d="M12 2v10"></path>
+            </svg>
+          </div>
+          <h3 class="feature-title">Underground Civil Trenching &amp; Duct Installation</h3>
+          <p class="feature-desc">
+            Precision micro-trenching and Horizontal Directional Drilling (HDD) executed to protect municipal infrastructure. We install heavy-duty HDPE SDR conduit systems below regional frost lines with minimal surface disruption.
+          </p>
+          <ul class="feature-check-list">
+            <li><span class="check-bullet">&bull;</span> Continuous Horizontal Directional Drilling (HDD)</li>
+            <li><span class="check-bullet">&bull;</span> Heavy-duty SDR-11 HDPE conduit placement &amp; duct-integrity proofing</li>
+            <li><span class="check-bullet">&bull;</span> Tier-22 traffic-rated precast polymer handholes and vaults</li>
+            <li><span class="check-bullet">&bull;</span> High-volume pneumatic cable blowing &amp; jetting</li>
+          </ul>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="feature-item-card">
+          <div class="feature-icon-box bubble-fiber">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+              <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+              <line x1="6" y1="6" x2="6.01" y2="6"></line>
+              <line x1="6" y1="18" x2="6.01" y2="18"></line>
+            </svg>
+          </div>
+          <h3 class="feature-title">High-Tension Aerial Cabling &amp; Pole Mounting</h3>
+          <p class="feature-desc">
+            Engineered utility pole attachments and overlashing designed to endure severe Western Canada wind vectors, ice loadings, and thermal cycling without fiber attenuation.
+          </p>
+          <ul class="feature-check-list">
+            <li><span class="check-bullet">&bull;</span> Extra High-Strength (EHS) galvanized messenger strand stringing</li>
+            <li><span class="check-bullet">&bull;</span> All-Dielectric Self-Supporting (ADSS) dielectric span deployment</li>
+            <li><span class="check-bullet">&bull;</span> Utility pole attachment permit compliance &amp; height clearance verification</li>
+            <li><span class="check-bullet">&bull;</span> Dead-end tensioning, down-guy anchoring &amp; snow/ice sag calculation</li>
+          </ul>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="feature-item-card">
+          <div class="feature-icon-box bubble-fiber">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 14 14"></polyline>
+            </svg>
+          </div>
+          <h3 class="feature-title">Core-Alignment Fusion Splicing</h3>
+          <p class="feature-desc">
+            Precision single-fiber and ribbon fusion splicing executed in clean climate-controlled splicing labs with typical insertion loss held below 0.02 dB per junction.
+          </p>
+          <ul class="feature-check-list">
+            <li><span class="check-bullet">&bull;</span> Single-Mode (OS2) and High-Count Ribbon (up to 864ct) splicing</li>
+            <li><span class="check-bullet">&bull;</span> Hermetically sealed IP68 dome enclosures (FOSC / Coyote)</li>
+            <li><span class="check-bullet">&bull;</span> Fiber distribution panel (FDP) termination &amp; rack dressing</li>
+            <li><span class="check-bullet">&bull;</span> Cleanroom-grade end-face inspection to IEC 61300-3-35</li>
+          </ul>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="feature-item-card">
+          <div class="feature-icon-box bubble-fiber">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+            </svg>
+          </div>
+          <h3 class="feature-title">Bi-Directional OTDR Certification &amp; Power Testing</h3>
+          <p class="feature-desc">
+            Comprehensive Tier-1 optical power testing and Tier-2 bi-directional OTDR trace characterization ensuring carrier-grade acceptance standards and long-term transmission integrity.
+          </p>
+          <ul class="feature-check-list">
+            <li><span class="check-bullet">&bull;</span> Multi-wavelength testing at 1310 nm, 1550 nm, and 1625 nm</li>
+            <li><span class="check-bullet">&bull;</span> Optical return loss (ORL) characterization &amp; splice verification</li>
+            <li><span class="check-bullet">&bull;</span> Complete Telcordia .SOR trace files &amp; engineering documentation</li>
+            <li><span class="check-bullet">&bull;</span> 24/7 emergency cut repair truck rolls for fiber breaks</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Enquiry / Feedback Form and Contact Information ALONE (As instructed) -->
+      <div class="section-heading-wrapper" style="margin-top: 3rem;">
+        <span class="section-label" style="color: #00f0ff;">Direct Communication</span>
+        <h2 class="section-title">Fiber Infrastructure Enquiry &amp; Contact Information</h2>
+        <p style="color: #94a3b8; font-size: 0.95rem; margin-top: 0.5rem; max-width: 650px;">
+          For route feasibility, underground conduit engineering, aerial line plans, or field feedback, contact our engineering office directly or submit the enquiry form below.
+        </p>
+      </div>
+
+      <div class="contact-layout-split">
+        
+        <!-- Contact Information Alone (Verified from s2k2.com) -->
+        <div class="contact-info-panel">
+          <h3 style="font-size: 1.35rem; margin-bottom: 0.5rem; color: #ffffff;">S2K2 Inc.</h3>
+          <p style="color: #94a3b8; font-size: 0.88rem; margin-bottom: 1.75rem;">
+            Optical Fiber Infrastructure &amp; Outside Plant Solutions
+          </p>
+
+          <div class="contact-meta-item">
+            <div class="contact-icon-bubble">
+              <svg width="20" height="20" fill="none" stroke="#00f0ff" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+            </div>
+            <div>
+              <div class="contact-meta-label">Headquarters / Operational Base</div>
+              <div class="contact-meta-val">Calgary, Alberta, Canada</div>
+              <div style="font-size: 0.8rem; color: #64748b; margin-top: 0.2rem;">Serving Southern Alberta &amp; Western Canada</div>
+            </div>
+          </div>
+
+          <div class="contact-meta-item">
+            <div class="contact-icon-bubble">
+              <svg width="20" height="20" fill="none" stroke="#00f0ff" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+            </div>
+            <div>
+              <div class="contact-meta-label">Direct Telephone</div>
+              <a href="tel:+15875863606" class="contact-meta-val">+1 (587) 586-3606</a>
+              <div style="font-size: 0.8rem; color: #64748b; margin-top: 0.2rem;">Field Dispatch &amp; Project Consultations</div>
+            </div>
+          </div>
+
+          <div class="contact-meta-item">
+            <div class="contact-icon-bubble">
+              <svg width="20" height="20" fill="none" stroke="#00f0ff" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+            </div>
+            <div>
+              <div class="contact-meta-label">Primary Email</div>
+              <a href="mailto:selvam@s2k2.com" class="contact-meta-val">selvam@s2k2.com</a>
+              <div style="font-size: 0.8rem; color: #64748b; margin-top: 0.2rem;">Official correspondence &amp; drawings intake</div>
+            </div>
+          </div>
+
+          <div class="contact-meta-item">
+            <div class="contact-icon-bubble">
+              <svg width="20" height="20" fill="none" stroke="#10b981" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            </div>
+            <div>
+              <div class="contact-meta-label">Restoration &amp; Safety</div>
+              <div class="contact-meta-val" style="font-size: 0.95rem;">24/7 Emergency Break Response</div>
+              <div style="font-size: 0.8rem; color: #64748b; margin-top: 0.2rem;">Rapid response for backhoe cuts &amp; storm damage</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Enquiry / Feedback Form -->
+        <div class="form-card">
+          <h3 style="font-size: 1.35rem; margin-bottom: 0.5rem; color: #ffffff;">Fiber Laying Enquiry &amp; Feedback</h3>
+          <p style="color: #94a3b8; font-size: 0.88rem; margin-bottom: 1.75rem;">
+            Submit your route parameters, project questions, or engineering feedback directly to our field management.
+          </p>
+
+          <form id="fiberEnquiryForm">
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label class="form-label" for="fiberName">Contact Name *</label>
+                <input class="form-input" id="fiberName" type="text" placeholder="e.g. David Miller" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="fiberEmail">Email Address *</label>
+                <input class="form-input" id="fiberEmail" type="email" placeholder="e.g. dmiller@telecom.ca" required />
+              </div>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label class="form-label" for="fiberPhone">Phone Number</label>
+                <input class="form-input" id="fiberPhone" type="tel" placeholder="+1 (403) 000-0000" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="fiberService">Service Type</label>
+                <select class="form-select" id="fiberService">
+                  <option value="Underground Trenching & Duct Installation">Underground Trenching &amp; Duct Installation</option>
+                  <option value="Aerial Fiber Cabling & Pole Mounting">Aerial Cabling &amp; Pole Mounting</option>
+                  <option value="Fusion Splicing & OTDR Testing">Fusion Splicing &amp; OTDR Testing</option>
+                  <option value="Emergency Cut Restoration">Emergency Cut Restoration</option>
+                  <option value="General Service Feedback / Enquiry">General Service Feedback / Enquiry</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="fiberMessage">Project Scope or Feedback Message *</label>
+              <textarea class="form-textarea" id="fiberMessage" placeholder="Specify approximate route distance, civil requirements, or questions..." required></textarea>
+            </div>
+
+            <button type="submit" class="form-submit-btn btn-float-cyan">
+              <span>Send Fiber Infrastructure Enquiry</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+            </button>
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ========================================================================
+       VIEW 3: WEB DESIGNING & BUSINESS INTEGRATIONS (/web-design)
+       ======================================================================== -->
+  <main id="view-web" class="view-section">
+    <div class="container-narrow division-hero">
+      
+      <!-- Back Navigation -->
+      <button class="back-to-hub-link" data-route="home">
+        &larr; Back to S2K2 Hub
+      </button>
+
+      <div class="division-hero-badge badge-web">
+        S2K2 Inc. &bull; Modern Web &amp; Business Systems
+      </div>
+
+      <h1 class="division-title">
+        Web Designing &amp;<br />
+        <span style="color: #d174d2;">Business Integrations</span>
+      </h1>
+
+      <!-- Mandatory Service Paragraph -->
+      <div class="core-statement-box web-statement">
+        <p>
+          "We create modern, responsive websites tailored to your business needs. Our solutions focus on user-friendly design, fast performance, and mobile compatibility to enhance user experience, attract customers, and drive online growth. Modern websites integrated with industry-trusted platforms: custom booking schedules, instant quote generators, table reservations, and POS billing systems."
+        </p>
+      </div>
+
+      <!-- Core Platform Integrations Section (Ref: shrkzdev.vercel.app) -->
+      <div class="section-heading-wrapper">
+        <span class="section-label" style="color: #d174d2;">Built-In Business Integrations</span>
+        <h2 class="section-title">Connecting Your Website Directly to Industry-Standard Tools</h2>
+        <p style="color: #94a3b8; font-size: 0.95rem; margin-top: 0.5rem; max-width: 680px;">
+          Rather than fragile unvetted plugins, we wire your website directly to enterprise platforms that run your business operations smoothly.
+        </p>
+      </div>
+
+      <div class="features-grid-2">
+        
+        <!-- Integration 1: Calendars & Scheduling -->
+        <div class="feature-item-card">
+          <div class="feature-icon-box bubble-web">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+          </div>
+          <h3 class="feature-title">Automated Scheduling &amp; Booking Calendars</h3>
+          <p class="feature-desc">
+            Eliminate phone tag and email delays. We deploy tailored appointment booking interfaces with real-time two-way calendar synchronization, allowing clients to schedule directly on your site.
+          </p>
+          <ul class="feature-check-list">
+            <li><span class="check-bullet-web">&bull;</span> Real-time 2-way sync across major corporate and personal calendar systems</li>
+            <li><span class="check-bullet-web">&bull;</span> Automated client SMS and email appointment reminders to eliminate no-shows</li>
+            <li><span class="check-bullet-web">&bull;</span> Customized intake questionnaires and preliminary consultation screening</li>
+            <li><span class="check-bullet-web">&bull;</span> Multi-staff availability mapping, buffer times, and timezone auto-detection</li>
+          </ul>
+        </div>
+
+        <!-- Integration 2: POS & Payments -->
+        <div class="feature-item-card">
+          <div class="feature-icon-box bubble-web">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+              <line x1="1" y1="10" x2="23" y2="10"></line>
+            </svg>
+          </div>
+          <h3 class="feature-title">POS &amp; Payment Gateway Integrations</h3>
+          <p class="feature-desc">
+            Frictionless, PCI-compliant payment gateways. We connect your web presence directly to industry-standard point-of-sale and digital billing systems for instant checkouts and automated invoicing.
+          </p>
+          <ul class="feature-check-list">
+            <li><span class="check-bullet-web">&bull;</span> Direct, secure checkouts supporting all major cards, digital wallets, and debit</li>
+            <li><span class="check-bullet-web">&bull;</span> Automated digital receipts and PDF tax invoices generated instantly upon transaction</li>
+            <li><span class="check-bullet-web">&bull;</span> Support for recurring client retainers, memberships, and milestone payouts</li>
+            <li><span class="check-bullet-web">&bull;</span> Direct synchronization with your business accounting and bookkeeping software</li>
+          </ul>
+        </div>
+
+        <!-- Integration 3: Dining & Reservations -->
+        <div class="feature-item-card">
+          <div class="feature-icon-box bubble-web">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
+              <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
+              <line x1="6" y1="1" x2="6" y2="4"></line>
+              <line x1="10" y1="1" x2="10" y2="4"></line>
+              <line x1="14" y1="1" x2="14" y2="4"></line>
+            </svg>
+          </div>
+          <h3 class="feature-title">Restaurant Table Reservations &amp; Dining Systems</h3>
+          <p class="feature-desc">
+            Custom-tailored for dining venues, bistros, and hospitality venues. We connect your site directly to reliable table management and reservation engines with visual seating layouts.
+          </p>
+          <ul class="feature-check-list">
+            <li><span class="check-bullet-web">&bull;</span> Direct table bookings and visual floorplan seating management</li>
+            <li><span class="check-bullet-web">&bull;</span> Real-time party size, dining times, and special dietary request intake</li>
+            <li><span class="check-bullet-web">&bull;</span> Instant notification alerts dispatched directly to staff and host stations</li>
+            <li><span class="check-bullet-web">&bull;</span> Mobile-optimized guest confirmation flows with automated reminder alerts</li>
+          </ul>
+        </div>
+
+        <!-- Integration 4: Interactive Tools & Automations -->
+        <div class="feature-item-card">
+          <div class="feature-icon-box bubble-web">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+              <polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
+          </div>
+          <h3 class="feature-title">Dynamic Estimators &amp; Lead Workflows</h3>
+          <p class="feature-desc">
+            Transform static contact forms into interactive qualification tools. Visitors configure their project scopes, generating actionable inquiries routed straight to your CRM.
+          </p>
+          <ul class="feature-check-list">
+            <li><span class="check-bullet-web">&bull;</span> Dynamic multi-step logic tailored specifically to your service offerings</li>
+            <li><span class="check-bullet-web">&bull;</span> Instant notification alerts dispatched to your email, WhatsApp, or phone</li>
+            <li><span class="check-bullet-web">&bull;</span> Direct synchronization with your CRM, spreadsheet, and business workflow platforms</li>
+            <li><span class="check-bullet-web">&bull;</span> Elimination of manual data re-entry and administrative delays</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- 3-Step Process (From shrkzdev.vercel.app) -->
+      <div class="section-heading-wrapper" style="margin-top: 3.5rem;">
+        <span class="section-label" style="color: #d174d2;">Engineering Methodology</span>
+        <h2 class="section-title">How We Build For Your Business</h2>
+      </div>
+
+      <div class="features-grid-3">
+        <div class="glass-panel" style="padding: 1.75rem;">
+          <div class="font-mono-tag" style="color: #d174d2; font-size: 1.25rem; font-weight: 800; margin-bottom: 0.5rem;">01</div>
+          <h3 style="font-size: 1.15rem; color: #ffffff; margin-bottom: 0.5rem;">Integration Mapping</h3>
+          <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.6;">
+            We audit your current workflow, determine the business platforms you use (calendars, POS, CRM), and blueprint the ideal client experience.
+          </p>
+        </div>
+        <div class="glass-panel" style="padding: 1.75rem;">
+          <div class="font-mono-tag" style="color: #d174d2; font-size: 1.25rem; font-weight: 800; margin-bottom: 0.5rem;">02</div>
+          <h3 style="font-size: 1.15rem; color: #ffffff; margin-bottom: 0.5rem;">Design, Code &amp; Wire-Up</h3>
+          <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.6;">
+            We craft a fast, mobile-first responsive layout, connect all live APIs and third-party tools, and review a staging prototype together.
+          </p>
+        </div>
+        <div class="glass-panel" style="padding: 1.75rem;">
+          <div class="font-mono-tag" style="color: #d174d2; font-size: 1.25rem; font-weight: 800; margin-bottom: 0.5rem;">03</div>
+          <h3 style="font-size: 1.15rem; color: #ffffff; margin-bottom: 0.5rem;">Testing, Launch &amp; Handover</h3>
+          <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.6;">
+            We test live bookings and transactions, deploy to your domain, and give you a straightforward walkthrough so you have 100% control.
+          </p>
+        </div>
+      </div>
+
+      <!-- Contact & Form Details (With Email Placeholder as instructed) -->
+      <div class="section-heading-wrapper" style="margin-top: 4rem;">
+        <span class="section-label" style="color: #d174d2;">Project Discussion</span>
+        <h2 class="section-title">Web Design Consultation &amp; Contact Details</h2>
+        <p style="color: #94a3b8; font-size: 0.95rem; margin-top: 0.5rem; max-width: 650px;">
+          Ready to enhance your digital presence with modern platform integrations? Contact us directly or submit your project details below.
+        </p>
+      </div>
+
+      <div class="contact-layout-split">
+        
+        <!-- Contact Information Panel (Web Design Placeholder Info as instructed) -->
+        <div class="contact-info-panel">
+          <h3 style="font-size: 1.35rem; margin-bottom: 0.5rem; color: #ffffff;">S2K2 Web Solutions</h3>
+          <p style="color: #94a3b8; font-size: 0.88rem; margin-bottom: 1.75rem;">
+            Custom Web Development &bull; Business Software Integrations
+          </p>
+
+          <div class="contact-meta-item">
+            <div class="contact-icon-bubble">
+              <svg width="20" height="20" fill="none" stroke="#d174d2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+            </div>
+            <div>
+              <div class="contact-meta-label">Web Division Direct Email</div>
+              <div class="contact-meta-val" style="color: #cbd5e1;">[Pending Official Finalization]</div>
+              <div class="placeholder-tag">
+                <span>&#9888;</span> Placeholder: webdesign@s2k2.com
+              </div>
+              <div style="font-size: 0.78rem; color: #94a3b8; margin-top: 0.35rem;">
+                Official division inbox being configured. Please use form or corporate contact.
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-meta-item">
+            <div class="contact-icon-bubble">
+              <svg width="20" height="20" fill="none" stroke="#d174d2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+            </div>
+            <div>
+              <div class="contact-meta-label">Telephone Consultation</div>
+              <div class="contact-meta-val" style="color: #cbd5e1;">Available via Inquiry / Scheduling</div>
+              <div style="font-size: 0.8rem; color: #64748b; margin-top: 0.2rem;">Or contact central office: +1 (587) 586-3606</div>
+            </div>
+          </div>
+
+          <div class="contact-meta-item">
+            <div class="contact-icon-bubble">
+              <svg width="20" height="20" fill="none" stroke="#d174d2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            </div>
+            <div>
+              <div class="contact-meta-label">Turnaround &amp; Consultation</div>
+              <div class="contact-meta-val" style="font-size: 0.95rem;">Rapid Project Scoping</div>
+              <div style="font-size: 0.8rem; color: #64748b; margin-top: 0.2rem;">Initial technical review and quote scope within 24 hours</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Project Consultation Form -->
+        <div class="form-card">
+          <h3 style="font-size: 1.35rem; margin-bottom: 0.5rem; color: #ffffff;">Start a Web Project Discussion</h3>
+          <p style="color: #94a3b8; font-size: 0.88rem; margin-bottom: 1.75rem;">
+            Tell us about your business goals and platform needs. We will prepare an architectural breakdown for you.
+          </p>
+
+          <form id="webConsultationForm">
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label class="form-label" for="webName">Your Name *</label>
+                <input class="form-input web-focus" id="webName" type="text" placeholder="e.g. Sarah Jenkins" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="webEmail">Email Address *</label>
+                <input class="form-input web-focus" id="webEmail" type="email" placeholder="e.g. sjenkins@business.com" required />
+              </div>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label class="form-label" for="webBusiness">Business / Current Domain</label>
+                <input class="form-input web-focus" id="webBusiness" type="text" placeholder="e.g. Jenkins Dental / myclinic.ca" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="webIntegration">Primary Integration Interest</label>
+                <select class="form-select web-focus" id="webIntegration">
+                  <option value="Online Appointment & Booking Calendars">Online Appointment &amp; Booking Calendars</option>
+                  <option value="POS & Payment Gateway Integration">POS &amp; Payment Gateway Integration</option>
+                  <option value="Table Reservations & Dining Systems">Table Reservations &amp; Dining Systems</option>
+                  <option value="Custom Estimators & Lead Engines">Custom Estimators &amp; Lead Engines</option>
+                  <option value="Full Website Redesign & Modern Stack">Full Website Redesign &amp; Modern Stack</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="webMessage">Project Requirements &amp; Scope *</label>
+              <textarea class="form-textarea web-focus" id="webMessage" placeholder="Describe the functionality, integrations, or challenges you want to solve..." required></textarea>
+            </div>
+
+            <button type="submit" class="form-submit-btn btn-float-violet">
+              <span>Send Project Inquiry</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+            </button>
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ========================================================================
+       PERSISTENT FLOATING QUICK DOCK (SWITCHER PILL BAR)
+       ======================================================================== -->
+  <aside class="floating-dock-bar" aria-label="Quick Service Navigator">
+    <button class="dock-item-btn active" data-route="home" title="Go to S2K2 Hub">
+      <span>🌐 Hub</span>
+    </button>
+    <button class="dock-item-btn dock-fiber" data-route="fibre-optic" title="Go to Fiber Laying">
+      <span>⚡ Fiber Optic</span>
+    </button>
+    <button class="dock-item-btn dock-web" data-route="web-design" title="Go to Web Design">
+      <span>💻 Web Design</span>
+    </button>
+  </aside>
+
+  <!-- Toast Notification Container -->
+  <div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+  <!-- ========================================================================
+       COMPANY DETAILS BOTTOM FOOTER (As required on the Home Page & Global)
+       ======================================================================== -->
+  <footer id="company-footer" class="global-footer">
+    <div class="container-wide">
+      
+      <div class="footer-top-grid">
+        
+        <!-- Company Identity -->
+        <div>
+          <div class="footer-brand-name">S2K2 Inc.</div>
+          <p class="footer-brand-desc">
+            Dual-capability infrastructure enterprise delivering critical optical fiber outside plant installations 
+            and modern high-performance web applications with business platform integrations.
+          </p>
+          <div style="margin-top: 1.25rem; display: flex; align-items: center; gap: 0.5rem;">
+            <span class="font-mono-tag" style="font-size: 0.75rem; color: #10b981; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: 0.25rem 0.65rem; border-radius: 9999px;">
+              Active in Alberta &bull; Canada
+            </span>
+          </div>
+        </div>
+
+        <!-- Division 1 Links -->
+        <div>
+          <h4 class="footer-col-title" style="color: #00f0ff;">Fiber Infrastructure</h4>
+          <ul class="footer-links-list">
+            <li class="footer-link-item"><a data-route="fibre-optic">Underground Trenching &amp; Ducting</a></li>
+            <li class="footer-link-item"><a data-route="fibre-optic">Aerial Cabling &amp; Pole Mounting</a></li>
+            <li class="footer-link-item"><a data-route="fibre-optic">Fusion Splicing (OS2 &amp; Ribbon)</a></li>
+            <li class="footer-link-item"><a data-route="fibre-optic">OTDR Testing &amp; Certification</a></li>
+            <li class="footer-link-item"><a data-route="fibre-optic">Enquiry &amp; Feedback Form</a></li>
+          </ul>
+        </div>
+
+        <!-- Division 2 Links -->
+        <div>
+          <h4 class="footer-col-title" style="color: #d174d2;">Web &amp; Digital</h4>
+          <ul class="footer-links-list">
+            <li class="footer-link-item"><a data-route="web-design">Custom Responsive Websites</a></li>
+            <li class="footer-link-item"><a data-route="web-design">Automated Booking Calendars</a></li>
+            <li class="footer-link-item"><a data-route="web-design">POS &amp; Online Payment Systems</a></li>
+            <li class="footer-link-item"><a data-route="web-design">Table Reservations &amp; Dining</a></li>
+            <li class="footer-link-item"><a data-route="web-design">Project Consultation Form</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact Information (From s2k2.com) -->
+        <div>
+          <h4 class="footer-col-title">Corporate Contact</h4>
+          <ul class="footer-links-list">
+            <li style="font-size: 0.88rem; color: #cbd5e1; display: flex; align-items: flex-start; gap: 0.5rem;">
+              <span style="color: #00f0ff;">📍</span>
+              <span>Calgary, Alberta, Canada</span>
+            </li>
+            <li style="font-size: 0.88rem; color: #cbd5e1; display: flex; align-items: center; gap: 0.5rem;">
+              <span style="color: #00f0ff;">📞</span>
+              <a href="tel:+15875863606" style="color: #ffffff; text-decoration: none; font-weight: 600;">+1 (587) 586-3606</a>
+            </li>
+            <li style="font-size: 0.88rem; color: #cbd5e1; display: flex; align-items: center; gap: 0.5rem;">
+              <span style="color: #00f0ff;">✉️</span>
+              <a href="mailto:selvam@s2k2.com" style="color: #00f0ff; text-decoration: none;">selvam@s2k2.com</a>
+            </li>
+            <li style="font-size: 0.78rem; color: #64748b; margin-top: 0.5rem; line-height: 1.5;">
+              Domain: <a href="https://s2k2.com/" target="_blank" rel="noopener" style="color: #94a3b8;">https://s2k2.com/</a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="footer-bottom-bar">
+        <div>
+          Copyright &copy; 2026 <strong>S2K2 Inc.</strong> &mdash; All Rights Reserved.
+        </div>
+        <div style="display: flex; gap: 1.5rem;">
+          <a data-route="fibre-optic" style="color: #94a3b8; text-decoration: none; font-size: 0.8rem;">Fiber Optic</a>
+          <a data-route="web-design" style="color: #94a3b8; text-decoration: none; font-size: 0.8rem;">Web Designing</a>
+          <a href="#company-footer" style="color: #94a3b8; text-decoration: none; font-size: 0.8rem;">Privacy &amp; Terms</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="router.js"></script>
+  <script src="app.js"></script>
+  <script src="grid-wave.js"></script>
+</body>
+</html>
