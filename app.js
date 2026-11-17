@@ -167,6 +167,7 @@
           },
           body: JSON.stringify({
             _subject: `[S2K2 Fiber Inquiry] ${service} - from ${name}`,
+            _replyto: email,
             Name: name,
             Email: email,
             Phone: phone || 'Not provided',
@@ -210,7 +211,7 @@
     });
   }
 
-  // --- Form 2: Web Designing Project Consultation Form (Dispatches to Gmail sharukesank01@gmail.com) ---
+  // --- Form 2: Web Designing Project Consultation Form (Dispatches to design@s2k2.com) ---
   const webForm = document.getElementById('webConsultationForm');
   if (webForm) {
     webForm.addEventListener('submit', async function (e) {
@@ -235,7 +236,7 @@
       }
 
       try {
-        const response = await fetch('https://formsubmit.co/ajax/sharukesank01@gmail.com', {
+        const response = await fetch('https://formsubmit.co/ajax/design@s2k2.com', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -243,6 +244,7 @@
           },
           body: JSON.stringify({
             _subject: `[S2K2 Web Inquiry] ${integration} - from ${name}`,
+            _replyto: email,
             Name: name,
             Email: email,
             Business: business || 'Not specified',
@@ -256,13 +258,13 @@
         if (data.success === 'true' || data.success === true) {
           showToast({
             title: 'Web Project Inquiry Sent',
-            subtitle: `Thank you ${name}. Your requirements have been submitted to our digital team.`
+            subtitle: `Thank you ${name}. Your requirements have been forwarded to design@s2k2.com.`
           }, true);
           webForm.reset();
         } else if (data.message && data.message.toLowerCase().includes('activation')) {
           showToast({
             title: 'One-Time Activation Email Sent',
-            subtitle: 'Check sharukesank01@gmail.com (including Spam folder) & click Activate Form.'
+            subtitle: 'Check design@s2k2.com (including Spam folder) & click Activate Form.'
           }, true);
         } else {
           showToast({
@@ -274,7 +276,7 @@
       } catch (err) {
         showToast({
           title: 'Inquiry Received',
-          subtitle: `Thank you ${name}. We will review your project details shortly.`
+          subtitle: `Thank you ${name}. We will review your project details for design@s2k2.com.`
         }, true);
         webForm.reset();
       } finally {

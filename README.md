@@ -103,6 +103,6 @@ npx serve .
 - **Company:** S2K2 Inc.
 - **Location:** Calgary, Alberta, Canada
 - **Direct Phone:** `+1 (587) 586-3606`
-- **Primary Corporate Email:** `selvam@s2k2.com`
+- **Primary Corporate & Fiber Division Email:** `selvam@s2k2.com`
+- **Web & Creative Design Email:** `design@s2k2.com`
 - **Domain:** `https://s2k2.com/`
-- **Web Division Email:** Placeholder configured for pending finalization.
