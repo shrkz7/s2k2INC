@@ -211,7 +211,7 @@
     });
   }
 
-  // --- Form 2: Web Designing Project Consultation Form (Dispatches to design@s2k2.com) ---
+  // --- Form 2: Web Designing Project Consultation Form (Dispatches via Web3Forms to design@s2k2.com) ---
   const webForm = document.getElementById('webConsultationForm');
   if (webForm) {
     webForm.addEventListener('submit', async function (e) {
@@ -219,7 +219,6 @@
 
       const name = document.getElementById('webName')?.value.trim();
       const email = document.getElementById('webEmail')?.value.trim();
-      const business = document.getElementById('webBusiness')?.value.trim();
       const integration = document.getElementById('webIntegration')?.value;
       const message = document.getElementById('webMessage')?.value.trim();
       const submitBtn = webForm.querySelector('button[type="submit"]');
@@ -235,41 +234,32 @@
         submitBtn.innerHTML = `<span>Sending Inquiry...</span>`;
       }
 
+      const formData = new FormData(webForm);
+      formData.set('subject', `[S2K2 Web Inquiry] ${integration || 'General'} - from ${name}`);
+      const jsonPayload = JSON.stringify(Object.fromEntries(formData));
+
       try {
-        const response = await fetch('https://formsubmit.co/ajax/design@s2k2.com', {
+        const response = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
           },
-          body: JSON.stringify({
-            _subject: `[S2K2 Web Inquiry] ${integration} - from ${name}`,
-            _replyto: email,
-            Name: name,
-            Email: email,
-            Business: business || 'Not specified',
-            'Primary Integration': integration,
-            'Project Requirements': message
-          })
+          body: jsonPayload
         });
 
         const data = await response.json().catch(() => ({}));
 
-        if (data.success === 'true' || data.success === true) {
+        if (response.status === 200 && (data.success || data.success === 'true')) {
           showToast({
             title: 'Web Project Inquiry Sent',
-            subtitle: `Thank you ${name}. Your requirements have been forwarded to design@s2k2.com.`
+            subtitle: `Thank you ${name}. Your requirements have been delivered to design@s2k2.com.`
           }, true);
           webForm.reset();
-        } else if (data.message && data.message.toLowerCase().includes('activation')) {
-          showToast({
-            title: 'One-Time Activation Email Sent',
-            subtitle: 'Check design@s2k2.com (including Spam folder) & click Activate Form.'
-          }, true);
         } else {
           showToast({
             title: 'Inquiry Recorded',
-            subtitle: 'Thank you. Our digital team will follow up promptly.'
+            subtitle: data.message || `Thank you ${name}. We will review your project details for design@s2k2.com.`
           }, true);
           webForm.reset();
         }
@@ -288,7 +278,7 @@
     });
   }
 
-  // --- Form 3: Social Media & Creative Design Consultation Form (Dispatches to design@s2k2.com) ---
+  // --- Form 3: Social Media & Creative Design Consultation Form (Dispatches via Web3Forms to design@s2k2.com) ---
   const creativeForm = document.getElementById('creativeConsultationForm');
   if (creativeForm) {
     creativeForm.addEventListener('submit', async function (e) {
@@ -296,10 +286,7 @@
 
       const name = document.getElementById('creativeName')?.value.trim();
       const email = document.getElementById('creativeEmail')?.value.trim();
-      const business = document.getElementById('creativeBusiness')?.value.trim();
-      const phone = document.getElementById('creativePhone')?.value.trim();
       const service = document.getElementById('creativeService')?.value;
-      const timing = document.getElementById('creativeTiming')?.value;
       const message = document.getElementById('creativeMessage')?.value.trim();
       const submitBtn = creativeForm.querySelector('button[type="submit"]');
 
@@ -314,43 +301,32 @@
         submitBtn.innerHTML = `<span>Sending Creative Request...</span>`;
       }
 
+      const formData = new FormData(creativeForm);
+      formData.set('subject', `[S2K2 Creative Inquiry] ${service || 'General'} - from ${name}`);
+      const jsonPayload = JSON.stringify(Object.fromEntries(formData));
+
       try {
-        const response = await fetch('https://formsubmit.co/ajax/design@s2k2.com', {
+        const response = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
           },
-          body: JSON.stringify({
-            _subject: `[S2K2 Creative Inquiry] ${service} - from ${name}`,
-            _replyto: email,
-            Name: name,
-            Email: email,
-            Phone: phone || 'Not provided',
-            'Business / Brand': business || 'Not specified',
-            'Creative Service': service,
-            'Seasonal Timing': timing,
-            'Project Scope / Brief': message
-          })
+          body: jsonPayload
         });
 
         const data = await response.json().catch(() => ({}));
 
-        if (data.success === 'true' || data.success === true) {
+        if (response.status === 200 && (data.success || data.success === 'true')) {
           showToast({
             title: 'Creative Brief Received',
-            subtitle: `Thank you ${name}. Your inquiry has been forwarded to design@s2k2.com.`
+            subtitle: `Thank you ${name}. Your inquiry has been delivered to design@s2k2.com.`
           }, 'creative');
           creativeForm.reset();
-        } else if (data.message && data.message.toLowerCase().includes('activation')) {
-          showToast({
-            title: 'One-Time Activation Email Sent',
-            subtitle: 'Check design@s2k2.com (including Spam folder) & click Activate Form.'
-          }, 'creative');
         } else {
           showToast({
-            title: 'Inquiry Recorded',
-            subtitle: 'Thank you. Our creative desk will review your requirements promptly.'
+            title: 'Brief Logged',
+            subtitle: data.message || `Thank you ${name}. We have noted your creative requirements for design@s2k2.com.`
           }, 'creative');
           creativeForm.reset();
         }

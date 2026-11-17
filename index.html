@@ -904,26 +904,31 @@
             Tell us about your business goals and platform needs. We will prepare an architectural breakdown for you.
           </p>
 
-          <form id="webConsultationForm">
+          <form id="webConsultationForm" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="6edac02e-c46f-4cdb-932b-011e4a9c2381" />
+            <input type="hidden" name="subject" value="New S2K2 Web Project Inquiry" />
+            <input type="hidden" name="from_name" value="S2K2 Web Platform" />
+            <input type="checkbox" name="botcheck" class="hidden" style="display: none;" />
+
             <div class="form-grid-2">
               <div class="form-group">
                 <label class="form-label" for="webName">Your Name *</label>
-                <input class="form-input web-focus" id="webName" type="text" placeholder="e.g. Sarah Jenkins" required />
+                <input class="form-input web-focus" id="webName" name="name" type="text" placeholder="e.g. Sarah Jenkins" required />
               </div>
               <div class="form-group">
                 <label class="form-label" for="webEmail">Email Address *</label>
-                <input class="form-input web-focus" id="webEmail" type="email" placeholder="e.g. sjenkins@business.com" required />
+                <input class="form-input web-focus" id="webEmail" name="email" type="email" placeholder="e.g. sjenkins@business.com" required />
               </div>
             </div>
 
             <div class="form-grid-2">
               <div class="form-group">
                 <label class="form-label" for="webBusiness">Business / Current Domain</label>
-                <input class="form-input web-focus" id="webBusiness" type="text" placeholder="e.g. Jenkins Dental / myclinic.ca" />
+                <input class="form-input web-focus" id="webBusiness" name="business" type="text" placeholder="e.g. Jenkins Dental / myclinic.ca" />
               </div>
               <div class="form-group">
                 <label class="form-label" for="webIntegration">Primary Integration Interest</label>
-                <select class="form-select web-focus" id="webIntegration">
+                <select class="form-select web-focus" id="webIntegration" name="integration">
                   <option value="Online Appointment & Booking Calendars">Online Appointment &amp; Booking Calendars</option>
                   <option value="POS & Payment Gateway Integration">POS &amp; Payment Gateway Integration</option>
                   <option value="Table Reservations & Dining Systems">Table Reservations &amp; Dining Systems</option>
@@ -935,7 +940,7 @@
 
             <div class="form-group">
               <label class="form-label" for="webMessage">Project Requirements &amp; Scope *</label>
-              <textarea class="form-textarea web-focus" id="webMessage" placeholder="Describe the functionality, integrations, or challenges you want to solve..." required></textarea>
+              <textarea class="form-textarea web-focus" id="webMessage" name="message" placeholder="Describe the functionality, integrations, or challenges you want to solve..." required></textarea>
             </div>
 
             <button type="submit" class="form-submit-btn btn-float-violet">
@@ -1231,33 +1236,38 @@
             Provide your campaign goals and design requirements below.
           </p>
 
-          <form id="creativeConsultationForm">
+          <form id="creativeConsultationForm" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="fe2f71d9-d567-43ee-9675-6cef379b0ac9" />
+            <input type="hidden" name="subject" value="New S2K2 Creative &amp; Social Brief" />
+            <input type="hidden" name="from_name" value="S2K2 Creative Studio" />
+            <input type="checkbox" name="botcheck" class="hidden" style="display: none;" />
+
             <div class="form-grid-2">
               <div class="form-group">
                 <label class="form-label" for="creativeName">Your Full Name *</label>
-                <input type="text" class="form-input creative-focus" id="creativeName" placeholder="e.g. Sarah Jenkins" required />
+                <input type="text" class="form-input creative-focus" id="creativeName" name="name" placeholder="e.g. Sarah Jenkins" required />
               </div>
               <div class="form-group">
                 <label class="form-label" for="creativeEmail">Email Address *</label>
-                <input type="email" class="form-input creative-focus" id="creativeEmail" placeholder="e.g. sarah@business.com" required />
+                <input type="email" class="form-input creative-focus" id="creativeEmail" name="email" placeholder="e.g. sarah@business.com" required />
               </div>
             </div>
 
             <div class="form-grid-2">
               <div class="form-group">
                 <label class="form-label" for="creativeBusiness">Business / Brand Name</label>
-                <input type="text" class="form-input creative-focus" id="creativeBusiness" placeholder="e.g. Peak Bistro &amp; Lounge" />
+                <input type="text" class="form-input creative-focus" id="creativeBusiness" name="business" placeholder="e.g. Peak Bistro &amp; Lounge" />
               </div>
               <div class="form-group">
                 <label class="form-label" for="creativePhone">Phone Number</label>
-                <input type="tel" class="form-input creative-focus" id="creativePhone" placeholder="e.g. +1 (403) 555-0199" />
+                <input type="tel" class="form-input creative-focus" id="creativePhone" name="phone" placeholder="e.g. +1 (403) 555-0199" />
               </div>
             </div>
 
             <div class="form-grid-2">
               <div class="form-group">
                 <label class="form-label" for="creativeService">Primary Creative Need *</label>
-                <select class="form-select creative-focus" id="creativeService">
+                <select class="form-select creative-focus" id="creativeService" name="service">
                   <option value="Social Media Setup & Profile Architecture">Social Media Setup &amp; Profile Architecture</option>
                   <option value="Ongoing Social Media Posts & Stories">Ongoing Social Media Posts &amp; Stories</option>
                   <option value="Print-Ready Promotional Flyers & Mailers">Print-Ready Promotional Flyers &amp; Mailers</option>
@@ -1269,7 +1279,7 @@
               </div>
               <div class="form-group">
                 <label class="form-label" for="creativeTiming">Target Timing / Seasonality</label>
-                <select class="form-select creative-focus" id="creativeTiming">
+                <select class="form-select creative-focus" id="creativeTiming" name="timing">
                   <option value="Immediate (Next 48-72 hours)">Immediate (Next 48-72 hours)</option>
                   <option value="Upcoming Holiday / Festival Season">Upcoming Holiday / Festival Season</option>
                   <option value="Next 2-4 Weeks (Planned Launch)">Next 2-4 Weeks (Planned Launch)</option>
@@ -1280,7 +1290,7 @@
 
             <div class="form-group">
               <label class="form-label" for="creativeMessage">Project Details, Seasonal Focus &amp; Requirements *</label>
-              <textarea class="form-textarea creative-focus" id="creativeMessage" placeholder="Describe your brand aesthetic, target audience, upcoming event date, or any specific flyer/poster requirements..." required></textarea>
+              <textarea class="form-textarea creative-focus" id="creativeMessage" name="message" placeholder="Describe your brand aesthetic, target audience, upcoming event date, or any specific flyer/poster requirements..." required></textarea>
             </div>
 
             <button type="submit" class="form-submit-btn btn-float-amber">
@@ -1440,8 +1450,8 @@
   </footer>
 
   <!-- Scripts (Versioned cache-busters ensure immediate hot-reload) -->
-  <script src="router.js?v=2.0"></script>
-  <script src="app.js?v=2.0"></script>
-  <script src="grid-wave.js?v=2.0"></script>
+  <script src="router.js?v=2.1"></script>
+  <script src="app.js?v=2.1"></script>
+  <script src="grid-wave.js?v=2.1"></script>
 </body>
 </html>
