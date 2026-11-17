@@ -121,6 +121,18 @@
       }
     });
 
+    // Update Mobile Drawer Email action based on active section
+    const drawerEmail = document.getElementById('mobileDrawerEmail');
+    if (drawerEmail) {
+      if (routeKey === ROUTES.WEB || routeKey === ROUTES.CREATIVE) {
+        drawerEmail.href = 'mailto:design@s2k2.com';
+        drawerEmail.title = 'Email S2K2 Design Studio (design@s2k2.com)';
+      } else {
+        drawerEmail.href = 'mailto:selvam@s2k2.com';
+        drawerEmail.title = 'Email S2K2 Headquarters (selvam@s2k2.com)';
+      }
+    }
+
     // Scroll to top smoothly if navigated
     if (shouldScrollTop) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
