@@ -286,7 +286,7 @@
     });
   }
 
-  // --- Form 3: Social Media & Creative Design Consultation Form (Dispatches to Gmail) ---
+  // --- Form 3: Social Media & Creative Design Consultation Form (Dispatches to design@s2k2.com) ---
   const creativeForm = document.getElementById('creativeConsultationForm');
   if (creativeForm) {
     creativeForm.addEventListener('submit', async function (e) {
@@ -313,7 +313,7 @@
       }
 
       try {
-        const response = await fetch('https://formsubmit.co/ajax/sharukesank01@gmail.com', {
+        const response = await fetch('https://formsubmit.co/ajax/design@s2k2.com', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -321,6 +321,7 @@
           },
           body: JSON.stringify({
             _subject: `[S2K2 Creative Inquiry] ${service} - from ${name}`,
+            _replyto: email,
             Name: name,
             Email: email,
             Phone: phone || 'Not provided',
@@ -336,13 +337,13 @@
         if (data.success === 'true' || data.success === true) {
           showToast({
             title: 'Creative Brief Received',
-            subtitle: `Thank you ${name}. Our creative studio will follow up promptly.`
+            subtitle: `Thank you ${name}. Your inquiry has been forwarded to design@s2k2.com.`
           }, 'creative');
           creativeForm.reset();
         } else if (data.message && data.message.toLowerCase().includes('activation')) {
           showToast({
             title: 'One-Time Activation Email Sent',
-            subtitle: 'Check sharukesank01@gmail.com (including Spam folder) & click Activate Form.'
+            subtitle: 'Check design@s2k2.com (including Spam folder) & click Activate Form.'
           }, 'creative');
         } else {
           showToast({
@@ -354,7 +355,7 @@
       } catch (err) {
         showToast({
           title: 'Brief Logged',
-          subtitle: `Thank you ${name}. We have noted your creative requirements.`
+          subtitle: `Thank you ${name}. We have noted your creative requirements for design@s2k2.com.`
         }, 'creative');
         creativeForm.reset();
       } finally {
